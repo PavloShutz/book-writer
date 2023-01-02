@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="user-books">
+        <h4>Books for you</h4>
+    </div>
+    <div class="books">
+        {% if books|length > 0 %}
+            {% for book in books %}
+                <div id="info">
+                    <div class="book-info" id="book-title"><h1>{{ book[1] }}</h1></div>
+                    <div class="book-info" id="book-info">
+                        <div><h2>Author: {{ book[2] }}</h2></div>
+                        <div><h2>Genre: {{ book[3] }}</h2></div>
+                        <div><h2>Preview: {{ book[4][:50] }}...</h2></div>
+                    </div>
+                    <div class="book-info" id="read-btn">
+                        <a href="{{ url_for('read_book', book_id=book[0]) }}">READ</a>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        {% else %}
+            <h5 id="nothing">Nothing here yet</h5>
+        {% endif %}
+    </div>
+{% endblock %}
