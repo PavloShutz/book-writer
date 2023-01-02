@@ -1,0 +1,124 @@
+.logo {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    text-align: left;
+    font-size: 60px;
+}
+
+.user-books {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    text-align: center;
+    font-size: 80px;
+}
+
+.write-book {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+#nothing {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    text-align: center;
+    font-size: 50px;
+}
+
+a {
+    margin-right: 50px;
+}
+
+.field {
+    font-size: 30px;
+}
+
+.book-editor {
+    font-family: 'Roboto Slab', serif;
+    font-size: 30px;
+    text-align: center;
+    margin: auto;
+}
+
+.content-editor {
+   font-family: 'Roboto Slab', serif;
+   font-size: 30px;
+   resize: none;
+   width: 70%;
+   height: 900px;
+}
+
+#info {
+    font-family: 'Roboto Slab', serif;
+    position: relative;
+    margin: auto;
+    vertical-align: center;
+}
+
+.book-info {
+    display: inline-block;
+    height: 170px;
+}
+
+#book-title {
+    text-align: center;
+    width: 20%;
+    border: 1px solid black;
+}
+
+#book-info {
+    position: absolute;
+    width: 50%;
+    border: 1px solid black;
+}
+
+#read-btn {
+    background-color: white;
+    position: absolute;
+    text-align: center;
+    right: 90px;
+    top: 0px;
+    width: 25%;
+    font-size: 24px;
+    border: 1px solid black;
+}
+
+#read-btn {
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#read-btn:after {
+  position: absolute;
+  opacity: 0;
+  top: 70px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#read-btn:hover{
+  padding-right: 24px;
+  padding-left: 8px;
+}
+
+#read-btn:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+
+#book-author {
+    right: 60px;
+}
+
+.book-element {
+    margin: auto;
+    text-align: center;
+    font-size: 30px;
+    margin: auto;
+}
+
+#text-area {
+    font-size: 30px;
+    resize: none;
+    width: 70%;
+    height: 1010px;
+    overflow: hidden;
+    border: none;
+    outline: none;
+}
