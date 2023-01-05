@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}New Book{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="book-editor">
+        <form method="post">
+            <label for="title" style="color: #377ba8;">Title</label>
+            <input name="title" id="title" value="{{ request.form['title'] }}" required>
+            <label for="genre" style="color: #377ba8;">Genre</label>
+            <input id="genre" name="genre" value="{{ request.form['genre'] }}" required>
+            <label for="content" style="color: #377ba8;">Content</label>
+            <textarea name="content" id="content">{{ request.form['content'] }}</textarea>
+            <input type="submit" value="PUBLISH">
+        </form>
+    </div>
+{% endblock %}

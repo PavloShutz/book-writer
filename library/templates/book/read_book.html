@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Read book{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <div id="book">
+        <div class="book-element">
+            <h2>{{ book['title'] }}</h2>
+        </div>
+        <div class="book-element">
+            <textarea readonly="readonly" id="text-area">{{ book['content'] }}</textarea>
+        </div>
+    </div>
+{% endblock %}

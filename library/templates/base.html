@@ -1,27 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 <head>
     <meta charset="UTF-8">
-    <title>BookWriter</title>
+    <title>{% block title %}{% endblock %} - BookWriter</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="logo">
-        <header>
-            <img src="{{ url_for('static', filename='favicon.png') }}" id="logo-icon"> BookWriter
-        </header>
-    </div>
-    <hr>
-    <nav>
-        <a href="{{ url_for('index') }}">Home Page</a>
-        <a href="{{ url_for('write_book') }}">Want to write a book?</a>
-    </nav>
-    <div class="content">
-        {% block content %} {% endblock %}
-    </div>
-</body>
-</html>
+<div class="logo">
+    <header>
+        <img src="{{ url_for('static', filename='favicon.png') }}" id="logo-icon"> BookWriter
+    </header>
+</div>
+<hr>
+<nav>
+    <ul>
+        {% if g.user %}
+            <li><span>{{ g.user['username'] }}</span>
+            <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+        {% else %}
+            <li><a href="{{ url_for('auth.register') }}">Register</a>
+            <li><a href="{{ url_for('auth.login') }}">Log In</a>
+        {% endif %}
+    </ul>
+</nav>
+<section class="content">
+    <header>
+        {% block header %} {% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %} {% endblock %}
+</section>
