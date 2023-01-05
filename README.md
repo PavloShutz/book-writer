@@ -13,3 +13,6 @@ Book writer web application allows to to write your book online. Though it seems
 ```
 git clone https://github.com/PavloShutz/book-writer.git
 ```
+
+## Other preparation
+Initialize database: ```flask --app book_writer init-db```
