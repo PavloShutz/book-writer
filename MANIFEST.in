@@ -1,0 +1,4 @@
+include book-writer/schema.sql
+graft book-writer/static
+graft book-writer/templates
+global-exclude *.pyc

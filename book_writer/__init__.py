@@ -8,7 +8,7 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY="Hop4key2un-",
-        DATABASE=os.path.join(app.instance_path, 'library.sqlite'),
+        DATABASE=os.path.join(app.instance_path, 'book_writer.sqlite'),
     )
 
     if test_config is None:
