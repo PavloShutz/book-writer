@@ -4,8 +4,8 @@ from flask import (
 
 from werkzeug.exceptions import abort
 
-from library.auth import login_required
-from library.db import get_db
+from book_writer.auth import login_required
+from book_writer.db import get_db
 
 bp = Blueprint('book', __name__)
 
