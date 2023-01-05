@@ -1,8 +1,13 @@
+<picture style="width: 30px; height: auto;">
+  <source media="(prefers-color-scheme: dark)" srcset="https://cdn-icons-png.flaticon.com/128/3839/3839574.png">
+  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://cdn-icons-png.flaticon.com/128/3839/3839574.png">
+</picture> 
+
 # book-writer
 
 ## What is it?
 
-Book writer web application allows to to write your book online. Though it seems like a post creating app, in future there will be added some specific features that allows you to create book. 
+Book writer web application allows you to write your book online. Though it seems like a post creating app, in future there will be added some specific features that allows you to create book. 
 
 ## Why it is cool?
 1. Easy registration and loginization.
@@ -14,5 +19,9 @@ Book writer web application allows to to write your book online. Though it seems
 git clone https://github.com/PavloShutz/book-writer.git
 ```
 
-## Other preparation
-Initialize database: ```flask --app book_writer init-db```
+## Other preparations
+- Initialize database: ```flask --app book_writer init-db```
+- Specify secret key in config.py: 
+```python
+SECRET_KEY = "YOUR SECRET KEY HERE"
+```
