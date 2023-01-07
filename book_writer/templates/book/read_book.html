@@ -2,6 +2,17 @@
 
 {% block header %}
     <h1>{% block title %}Read book{% endblock %}</h1>
+    <form method="post">
+        {{ form.csrf_token }}
+        <input type="submit" value="RATE"> {{ form.rate() }}
+        {% if form.rate.errors %}
+            <ul class="errors">
+                {% for error in form.rate.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
 {% endblock %}
 
 {% block content %}

@@ -14,5 +14,6 @@ CREATE TABLE book (
     title TEXT NOT NULL,
     content TEXT NOT NULL,
     genre TEXT NOT NULL,
+    rating FLOAT DEFAULT 0,
     FOREIGN KEY (author_id) REFERENCES user (id)
 );

@@ -25,3 +25,12 @@ class BookEditingForm(FlaskForm):
     content = TextAreaField(
         label=label.format("Content")
     )
+
+
+class RateForm(FlaskForm):
+    label = Markup('<label class="label">{}</label>')
+    rate = SelectField(
+        label=label.format("Rate this book"), choices=[
+            (i, str(i)) for i in range(1, 6)
+        ]
+    )

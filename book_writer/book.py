@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 
 from .auth import login_required
 from .db import get_db
-from .forms import BookEditingForm
+from .forms import BookEditingForm, RateForm
 
 bp = Blueprint('book', __name__)
 
@@ -15,7 +15,7 @@ bp = Blueprint('book', __name__)
 def index():
     db = get_db()
     books = db.execute(
-        'SELECT b.id, title, content, created, genre, author_id, username'
+        'SELECT b.id, title, content, created, genre, rating, author_id, username'
         ' FROM book b JOIN user u ON b.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -54,7 +54,7 @@ def create():
 
 def get_book(book_id, check_author=True, read_mode=False):
     book = get_db().execute(
-        'SELECT b.id, title, content, created, genre, author_id, username'
+        'SELECT b.id, title, content, created, genre, rating, author_id, username'
         ' FROM book b JOIN user u ON b.author_id = u.id'
         ' WHERE b.id = ?',
         (book_id,)
@@ -119,9 +119,32 @@ def delete(book_id):
     return redirect(url_for('book.index'))
 
 
-@bp.route('/read/<int:book_id>')
+def get_rating(book_id):
+    db = get_db()
+    rating = db.execute("SELECT rating FROM book WHERE id = ?", (book_id,)).fetchone()
+    return rating[0]
+
+
+@bp.route('/read/<int:book_id>', methods=("GET", "POST"))
 def read(book_id):
     if session.get('user_id') is None:
         return redirect(url_for('auth.login'))
     book = get_book(book_id, read_mode=True)
-    return render_template('book/read_book.html', book=book)
+    rate_form = RateForm()
+    if request.method == "POST":
+        rating = rate_form.rate.data
+        current_rating = get_rating(book_id)
+        db = get_db()
+        if current_rating == 0:
+            db.execute(
+                "UPDATE book SET rating = ? WHERE id = ?",
+                (rating, book_id)
+            )
+        else:
+            db.execute(
+                "UPDATE book SET rating = (rating + ?) / 2 WHERE id = ?",
+                (rating, book_id)
+            )
+        db.commit()
+        flash("Thanks for your rating!")
+    return render_template('book/read_book.html', book=book, form=rate_form)

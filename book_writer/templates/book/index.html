@@ -15,7 +15,9 @@
                     <header>
                         <div>
                             <h1>{{ book['title'] }}</h1>
-                            <div class="about">genre: {{ book['genre'] }}<br> by {{ book['username'] }} on {{ book['created'].strftime('%Y-%m-%d') }}</div>
+                            <div class="about">rating: {{ '%0.2f' % book['rating']|float }} / 5<br>
+                                genre: {{ book['genre'] }}<br>
+                                by {{ book['username'] }} on {{ book['created'].strftime('%Y-%m-%d') }}</div>
                         </div>
                         <a class="action" href="{{ url_for('book.read', book_id=book['id']) }}">Read</a>
                         {% if g.user['id'] == book['author_id'] %}
