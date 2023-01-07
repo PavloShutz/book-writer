@@ -15,7 +15,13 @@
                     <header>
                         <div>
                             <h1>{{ book['title'] }}</h1>
-                            <div class="about">rating: {{ '%0.2f' % book['rating']|float }} / 5<br>
+                            <div class="about">
+                                   {% for i in range(1, 6) %}
+                                        {% if i > book['rating'] %} ★
+                                        {% else %}<font color="orange">★</font>
+                                        {% endif %}
+                                   {% endfor %}
+                                rating: {{ '%0.2f' % book['rating']|float }} / 5<br>
                                 genre: {{ book['genre'] }}<br>
                                 by {{ book['username'] }} on {{ book['created'].strftime('%Y-%m-%d') }}</div>
                         </div>
@@ -24,7 +30,6 @@
                             <a class="action" href="{{ url_for('book.update', book_id=book['id']) }}">Edit</a>
                         {% endif %}
                     </header>
-                    <p class="body">{{ book['content'][:50] }}...</p>
                 </article>
                 {% if not loop.last %}
                     <hr>
