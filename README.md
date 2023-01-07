@@ -21,7 +21,8 @@ git clone https://github.com/PavloShutz/book-writer.git
 
 ## Other preparations
 - Initialize database: ```flask --app book_writer init-db```
-- Specify secret key in config.py: 
+- Specify secret keys in config.py: 
 ```python
 SECRET_KEY = "YOUR SECRET KEY HERE"
+WTF_CSRF_SECRET_KEY = "YOUR SECRET KEY HERE"
 ```
