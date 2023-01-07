@@ -8,3 +8,4 @@ class Config(object):
     DEBUG = False
     SECRET_KEY = "YOUR SECRET KEY HERE"
     DATABASE = os.path.join(current_app.instance_path, 'book_writer.sqlite')
+    WTF_CSRF_SECRET_KEY = "YOUR SECRET KEY HERE"

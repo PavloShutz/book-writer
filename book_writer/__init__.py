@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_wtf.csrf import CSRFProtect
 
 
 def create_app(test_config=None):
@@ -23,6 +24,8 @@ def create_app(test_config=None):
 
     from . import db, auth, book
     db.init_app(app)
+    csrf = CSRFProtect()
+    csrf.init_app(app)
     app.register_blueprint(auth.bp)
     app.register_blueprint(book.bp)
     app.add_url_rule('/', endpoint='index')

@@ -5,16 +5,18 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from book_writer.db import get_db
+from .db import get_db
+from .forms import LoginForm
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+    form = LoginForm()
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = form.username.data
+        password = form.password.data
         db = get_db()
         error = None
 
@@ -37,14 +39,15 @@ def register():
 
         flash(error)
 
-    return render_template('auth/register.html')
+    return render_template('auth/register.html', form=form)
 
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
+    form = LoginForm()
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = form.username.data
+        password = form.password.data
         db = get_db()
         error = None
         user = db.execute(
@@ -63,7 +66,7 @@ def login():
 
         flash(error)
 
-    return render_template('auth/login.html')
+    return render_template('auth/login.html', form=form)
 
 
 @bp.before_app_request

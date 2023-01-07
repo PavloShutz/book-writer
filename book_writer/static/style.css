@@ -1,7 +1,8 @@
-html { font-family: sans-serif; background: #eee; padding: 1rem; }
+html { font-family: Roboto Slab; background: #eee; padding: 1rem; }
 body { max-width: 960px; margin: 0 auto; background: white; }
 h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
 a { color: #377ba8; }
+.label {color: #377ba8;}
 hr { border: none; border-top: 1px solid lightgray; }
 nav { background: lightgray; display: flex; align-items: center; padding: 0 0.5rem; }
 nav h1 { flex: auto; margin: 0; }
@@ -23,27 +24,23 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 .content input, .content textarea { margin-bottom: 1em; }
 .content textarea { min-height: 12em; resize: vertical; }
 input.danger { color: #cc2f2e; }
-input[type=submit] { align-self: start; min-width: 10em; }
+input[type=submit] { align-self: center; min-width: 10em; }
 
 .logo {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
     text-align: left;
     font-size: 60px;
 }
 
 .user-books {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
     text-align: center;
     font-size: 80px;
 }
 
 .write-book {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
     font-size: 20px;
 }
 
 #nothing {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
     text-align: center;
     font-size: 50px;
     color: #377ba8;
@@ -58,14 +55,12 @@ a {
 }
 
 .book-editor {
-    font-family: 'Roboto Slab', serif;
     font-size: 30px;
     text-align: center;
     margin: auto;
 }
 
 .content-editor {
-   font-family: 'Roboto Slab', serif;
    font-size: 30px;
    resize: none;
    width: 70%;
@@ -73,7 +68,6 @@ a {
 }
 
 #info {
-    font-family: 'Roboto Slab', serif;
     position: relative;
     margin: auto;
     vertical-align: center;
@@ -96,39 +90,6 @@ a {
     border: 1px solid black;
 }
 
-#read-btn {
-    background-color: white;
-    position: absolute;
-    text-align: center;
-    right: 90px;
-    top: 0px;
-    width: 25%;
-    font-size: 24px;
-    border: 1px solid black;
-}
-
-#read-btn {
-    cursor: pointer;
-    transition: 0.5s;
-}
-
-#read-btn:after {
-  position: absolute;
-  opacity: 0;
-  top: 70px;
-  right: -20px;
-  transition: 0.5s;
-}
-
-#read-btn:hover{
-  padding-right: 24px;
-  padding-left: 8px;
-}
-
-#read-btn:hover:after {
-  opacity: 1;
-  right: 10px;
-}
 
 #book-author {
     right: 60px;
@@ -149,4 +110,9 @@ a {
     overflow: hidden;
     border: none;
     outline: none;
+}
+
+.auth {
+    text-align: center;
+    margin: auto;
 }

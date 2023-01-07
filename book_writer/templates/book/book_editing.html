@@ -7,16 +7,45 @@
 {% block content %}
     <div class="book-editor">
         <form method="post">
-            <label for="title">Title</label>
-            <input name="title" id="title" value="{{ request.form['title'] or book['title'] }}" required>
-            <label for="genre" >Genre</label>
-            <input name="genre" id="genre" value="{{ request.form['genre'] or book['genre'] }}" required>
-            <label for="content">Content</label>
-            <textarea name="content" id="content">{{ request.form['content'] or book['content'] }}</textarea>
+            {{ form.csrf_token }}
+            {{ form.title.label }}
+            {% set f = form.title.process_data(book['title']) %}
+            {{ form.title() }}
+            {% if form.title.errors %}
+            <ul class="errors">
+                {% for error in form.title.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {{ form.genre.label }}
+            {{ form.genre }}
+            {% if form.genre.errors %}
+            <ul class="errors">
+                {% for error in form.genre.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {{ form.content.label }}
+            {% set f = form.content.process_data(book['content']) %}
+            {{ form.content}}
+            {% if form.content.errors %}
+            <ul class="errors">
+                {% for error in form.content.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
             <input type="submit" value="SAVE">
+
         </form>
         <hr>
-        <form action="{{ url_for('book.delete', id=book['id']) }}" method="post">
+        <form action="{{ url_for('book.delete', book_id=book['id']) }}" method="post">
+            {{ form.csrf_token }}
             <input class="danger" type="submit" value="DELETE" onclick="return confirm('Are you sure?');">
         </form>
     </div>
