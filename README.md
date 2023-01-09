@@ -1,3 +1,5 @@
+![check-code-coverage](https://img.shields.io/badge/code--coverage-100%25-brightgreen)
+
 <picture style="width: 30px; height: auto;">
   <source media="(prefers-color-scheme: dark)" srcset="https://cdn-icons-png.flaticon.com/128/3839/3839574.png">
   <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://cdn-icons-png.flaticon.com/128/3839/3839574.png">
