@@ -1,4 +1,4 @@
-![check-code-coverage](https://img.shields.io/badge/code--coverage-100%25-brightgreen)
+![check-tests-passing](https://img.shields.io/badge/tests--passing-100%25-brightgreen)
 
 <picture style="width: 30px; height: auto;">
   <source media="(prefers-color-scheme: dark)" srcset="https://cdn-icons-png.flaticon.com/128/3839/3839574.png">
