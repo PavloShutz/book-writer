@@ -14,7 +14,7 @@ Book writer web application allows you to write your book online. Though it seem
 ## Why it is cool?
 1. Easy registration and loginization.
 2. Cool book editor.
-3. Read other people's books.
+3. Read other people's books and rate them.
 
 ## How to install it?
 ```
