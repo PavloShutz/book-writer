@@ -1,7 +1,7 @@
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-
+from flask_paginate import Pagination, get_page_parameter
 from werkzeug.exceptions import abort
 
 from .auth import login_required
@@ -11,15 +11,32 @@ from .forms import BookEditingForm, RateForm
 bp = Blueprint('book', __name__)
 
 
-@bp.route('/')
+@bp.route('/', methods=('GET', 'POST'))
 def index():
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 3
+    offset = (page - 1) * per_page
     db = get_db()
+    total = db.execute("SELECT * FROM book").fetchall()
     books = db.execute(
         'SELECT b.id, title, content, created, genre, rating, author_id, username'
         ' FROM book b JOIN user u ON b.author_id = u.id'
-        ' ORDER BY created DESC'
+        ' ORDER BY created DESC LIMIT ? OFFSET ?', (per_page, offset)
     ).fetchall()
-    return render_template('book/index.html', books=books)
+    pagination = Pagination(
+        page=page,
+        per_page=per_page,
+        offset=offset,
+        total=len(total),
+        search=search,
+        record_name='books',
+        css_framework='bootstrap4'
+    )
+    return render_template('book/index.html', books=books, pagination=pagination)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -148,3 +165,20 @@ def read(book_id):
         db.commit()
         flash("Thanks for your rating!")
     return render_template('book/read_book.html', book=book, form=rate_form)
+
+
+@bp.route("/users")
+def show_users():
+    db = get_db()
+    users = {}
+    query = db.execute("""
+    SELECT rating, username FROM book JOIN user ON book.author_id = user.id
+    """).fetchall()
+    for user in query:
+        if user['username'] not in users.keys():
+            users[user['username']] = user['rating']
+        else:
+            users[user['username']] = (
+                    users[user['username']] + user['rating']
+            ) / 2
+    return render_template('book/users.html', users=users)

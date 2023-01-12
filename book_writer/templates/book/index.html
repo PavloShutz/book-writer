@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Books{% endblock %}</h1>
+<h1 style="text-align: center;font-size: 60px;">{% block title %}Books{% endblock %}</h1>
     {% if g.user %}
-        <a class="action" href="{{ url_for('book.create') }}">New</a>
+        <a style="height: 40px;font-family: Roboto Slab;" class="btn btn-dark" href="{{ url_for('book.create') }}">Create Book</a>
     {% endif %}
+    <hr>
 {% endblock %}
 
 {% block content %}
+    {{ pagination.info }}
     <div class="books">
         {% if books|length > 0 %}
             {% for book in books %}
-                <article class="post">
+                {{ loop.index + pagination.skip }}
+                <article class="post" style="background-color: lightgrey;height: 160px;">
                     <header>
                         <div>
-                            <h1>{{ book['title'] }}</h1>
+                            <h1 style="font-family: Roboto Slab;font-size: 40px;">
+                                {{ book['title'] }}
+                            </h1>
                             <div class="about">
                                    {% for i in range(1, 6) %}
                                         {% if i > book['rating'] %} ★
@@ -25,9 +30,9 @@
                                 genre: {{ book['genre'] }}<br>
                                 by {{ book['username'] }} on {{ book['created'].strftime('%Y-%m-%d') }}</div>
                         </div>
-                        <a class="action" href="{{ url_for('book.read', book_id=book['id']) }}">Read</a>
+                        <a style="font-family: Roboto Slab;" class="btn btn-primary" href="{{ url_for('book.read', book_id=book['id']) }}">Read</a>
                         {% if g.user['id'] == book['author_id'] %}
-                            <a class="action" href="{{ url_for('book.update', book_id=book['id']) }}">Edit</a>
+                            <a style="font-family: Roboto Slab;" class="btn btn-warning" href="{{ url_for('book.update', book_id=book['id']) }}">Edit</a>
                         {% endif %}
                     </header>
                 </article>
@@ -39,4 +44,5 @@
             <h5 id="nothing">Nothing here yet</h5>
         {% endif %}
     </div>
+    {{ pagination.links }}
 {% endblock %}

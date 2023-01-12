@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Users{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% for user, rating in users.items() %}
+        <b>{{ user }}</b><br>
+        {% for i in range(1, 6) %}
+            {% if i > rating %} ★
+            {% else %}<font color="orange">★</font>
+            {% endif %}
+        {% endfor %}
+        <b>{{ '%0.2f' % rating|float }}</b><br>
+    {% endfor %}
+{% endblock %}

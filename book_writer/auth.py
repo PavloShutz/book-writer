@@ -6,14 +6,14 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from .db import get_db
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
-    form = LoginForm()
+    form = RegisterForm()
     if request.method == 'POST':
         username = form.username.data
         password = form.password.data

@@ -7,6 +7,7 @@
 {% block content %}
     <form method="post" class="auth">
         {{ form.csrf_token }}
+
         <p>{{ form.username.label }}</p>
         <p>{{ form.username(size=20) }}</p>
         {% if form.username.errors %}
@@ -16,6 +17,7 @@
             {% endfor %}
             </ul>
         {% endif %}
+
         <p>{{ form.password.label }}</p>
         <p>{{ form.password(size=20) }}</p>
         {% if form.password.errors %}
@@ -25,6 +27,7 @@
             {% endfor %}
             </ul>
         {% endif %}
-        <input type="submit" value="Register">
+
+        <input class="btn btn-primary" type="submit" value="Register">
     </form>
 {% endblock %}
