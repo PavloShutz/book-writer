@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Edit <label style="color: #377ba8;">"{{ book['title'] }}"</label>{% endblock %}</h1>
+<h1>{% block title %}Edit "{{ book['title'] }}"{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
             {{ form.csrf_token }}
             {{ form.title.label }}
             {% set f = form.title.process_data(book['title']) %}
-            {{ form.title() }}
+            {{ form.title(class_="handwriting-input") }}
             {% if form.title.errors %}
             <ul class="errors">
                 {% for error in form.title.errors %}
@@ -20,7 +20,7 @@
             {% endif %}
 
             {{ form.genre.label }}
-            {{ form.genre }}
+            {{ form.genre(class_="handwriting-input") }}
             {% if form.genre.errors %}
             <ul class="errors">
                 {% for error in form.genre.errors %}
@@ -31,7 +31,7 @@
 
             {{ form.content.label }}
             {% set f = form.content.process_data(book['content']) %}
-            {{ form.content}}
+            {{ form.content(class_="handwriting-input") }}
             {% if form.content.errors %}
             <ul class="errors">
                 {% for error in form.content.errors %}

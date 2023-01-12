@@ -2,16 +2,26 @@
 
 {% block header %}
     <h1>{% block title %}Users{% endblock %}</h1>
+    <img style="height: 150px;" src="https://img.freepik.com/premium-vector/pen-signature-flat-icon-vector_149152-737.jpg?w=2000"/>
 {% endblock %}
 
 {% block content %}
-    {% for user, rating in users.items() %}
-        <b>{{ user }}</b><br>
-        {% for i in range(1, 6) %}
-            {% if i > rating %} ★
-            {% else %}<font color="orange">★</font>
-            {% endif %}
-        {% endfor %}
-        <b>{{ '%0.2f' % rating|float }}</b><br>
-    {% endfor %}
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Average rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user, rating in users.items() %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ user }}</td>
+                    <td>{{ '%0.2f' % rating|float }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -1,4 +1,4 @@
-html { font-family: Roboto Slab; background: #eee; padding: 1rem; }
+html { font-family: Roboto Slab; background: #adb5bd; padding: 1rem; }
 body {margin: 0 auto; text}
 h1 { font-family: Roboto Slab; color: #377ba8; margin: 1rem 0; }
 a {
@@ -129,4 +129,8 @@ a {
     padding-left: 2px;
     padding: .1em .25em;
     font-size: 150%;
+}
+
+.handwriting-input {
+    font-family: Mistral;
 }
