@@ -1,3 +1,5 @@
+"""Book writer with ```create_app``` application factory."""
+
 import os
 
 from flask import Flask
@@ -23,9 +25,11 @@ def create_app(test_config=None):
         pass
 
     from . import db, auth, book
+    # registering application
     db.init_app(app)
     csrf = CSRFProtect()
     csrf.init_app(app)
+    # registering blueprints
     app.register_blueprint(auth.bp)
     app.register_blueprint(book.bp)
     app.add_url_rule('/', endpoint='index')

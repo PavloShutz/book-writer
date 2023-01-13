@@ -9,39 +9,46 @@
 {% endblock %}
 
 {% block content %}
-    {{ pagination.info }}
+    <br>
     <div class="books">
         {% if books|length > 0 %}
-            {% for book in books %}
-                <article class="post" style="background-color: lightgrey;height: 160px;">
-                    <header>
-                        <div>
-                            <h1 style="font-family: Roboto Slab;font-size: 40px;">
-                               {{ loop.index + pagination.skip }}. {{ book['title'] }}
-                            </h1>
-                            <div class="about">
-                                   {% for i in range(1, 6) %}
-                                        {% if i > book['rating'] %} ★
-                                        {% else %}<font color="orange">★</font>
-                                        {% endif %}
-                                   {% endfor %}
-                                rating: {{ '%0.2f' % book['rating']|float }} / 5<br>
-                                genre: {{ book['genre'] }}<br>
-                                by {{ book['username'] }} on {{ book['created'].strftime('%Y-%m-%d') }}</div>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for book in books %}
+                    <div class="col">
+                        <div class="card text-bg-secondary mb-3 mx-auto h-100" style="width: 19rem;">
+                                <div class="card-body">
+                                    <div class="card-header" style="font-family: Roboto Slab;font-size: 30px;">
+                                       {{ loop.index + pagination.skip }}. {{ book['title'] }}
+                                    </div>
+                                    <div class="card-content">
+                                           {% for i in range(1, 6) %}
+                                                {% if i > book['rating'] %} ★
+                                                {% else %}<font color="orange">★</font>
+                                                {% endif %}
+                                           {% endfor %}
+                                        rating: {{ '%0.2f' % book['rating']|float }} / 5<br>
+                                        genre: {{ book['genre'] }}<br>
+                                        author: {{ book['username'] }}
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    {{ book['created'].strftime('%Y-%m-%d') }}
+                                </div>
+                                <div class="text-center">
+                                    <a style="font-family: Roboto Slab;width: 15rem;" class="btn btn-primary" href="{{ url_for('book.read', book_id=book['id']) }}">Read</a>
+                                    <br><br>
+                                    {% if g.user['id'] == book['author_id'] %}
+                                        <a style="font-family: Roboto Slab;width: 15rem;" class="btn btn-warning" href="{{ url_for('book.update', book_id=book['id']) }}">Edit</a>
+                                    {% endif %}
+                                </div>
                         </div>
-                        <a style="font-family: Roboto Slab;" class="btn btn-primary" href="{{ url_for('book.read', book_id=book['id']) }}">Read</a>
-                        {% if g.user['id'] == book['author_id'] %}
-                            <a style="font-family: Roboto Slab;" class="btn btn-warning" href="{{ url_for('book.update', book_id=book['id']) }}">Edit</a>
-                        {% endif %}
-                    </header>
-                </article>
-                {% if not loop.last %}
-                    <hr>
-                {% endif %}
-            {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
         {% else %}
             <h5 id="nothing">Nothing here yet</h5>
         {% endif %}
-    </div>
+        </div>
+    <br>
     {{ pagination.links }}
 {% endblock %}

@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import (
     StringField, PasswordField, SelectField, TextAreaField
 )
-from wtforms.validators import DataRequired, EqualTo
+from wtforms.validators import DataRequired
 
 from .constants import GENRES
 
@@ -15,11 +15,11 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
-    password = PasswordField("Password", validators=[
-        DataRequired(), EqualTo('confirm', message='Passwords must match!')
-    ])
+    password = PasswordField("Password", validators=[DataRequired()])
+
 
 class BookEditingForm(FlaskForm):
+    """Edit book in book editor."""
     label = Markup('<label class="label">{}</label>')
     title = StringField(
         label=label.format("Title"), validators=[DataRequired()]
@@ -34,6 +34,7 @@ class BookEditingForm(FlaskForm):
 
 
 class RateForm(FlaskForm):
+    """Publish book rating."""
     label = Markup('<label class="label">{}</label>')
     rate = SelectField(
         label=label.format("Rate this book"), choices=[

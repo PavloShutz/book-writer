@@ -1,3 +1,5 @@
+"""Establish connection with database."""
+
 import sqlite3
 
 import click

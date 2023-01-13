@@ -1,7 +1,15 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint,
+    flash,
+    g,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for
 )
-from flask_paginate import Pagination, get_page_parameter
+from flask_paginate import \
+    Pagination, get_page_parameter
 from werkzeug.exceptions import abort
 
 from .auth import login_required
@@ -34,7 +42,7 @@ def index():
         total=len(total),
         search=search,
         record_name='books',
-        css_framework='bootstrap4'
+        css_framework='bootstrap5'
     )
     return render_template('book/index.html', books=books, pagination=pagination)
 
