@@ -4,6 +4,7 @@ import os
 
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
+from flask_bootstrap import Bootstrap5
 
 
 def create_app(test_config=None):
@@ -29,9 +30,16 @@ def create_app(test_config=None):
     db.init_app(app)
     csrf = CSRFProtect()
     csrf.init_app(app)
+    bootstrap = Bootstrap5()
+    bootstrap.init_app(app)
     # registering blueprints
     app.register_blueprint(auth.bp)
     app.register_blueprint(book.bp)
     app.add_url_rule('/', endpoint='index')
+    from .http_errors import \
+        page_not_found, internal_server_error
+    # register error handlers
+    app.register_error_handler(404, page_not_found)
+    app.register_error_handler(500, internal_server_error)
 
     return app

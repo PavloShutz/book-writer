@@ -1,7 +1,11 @@
 from flask import Markup
 from flask_wtf import FlaskForm
 from wtforms import (
-    StringField, PasswordField, SelectField, TextAreaField
+    StringField,
+    PasswordField,
+    SelectField,
+    TextAreaField,
+    SubmitField
 )
 from wtforms.validators import DataRequired
 
@@ -11,11 +15,13 @@ from .constants import GENRES
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField()
 
 
 class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField()
 
 
 class BookEditingForm(FlaskForm):
@@ -41,3 +47,4 @@ class RateForm(FlaskForm):
             (i, str(i)) for i in range(1, 6)
         ]
     )
+    submit = SubmitField()

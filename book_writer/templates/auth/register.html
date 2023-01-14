@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
 
 {% block header %}
   <h1>{% block title %}Sign Up{% endblock %}</h1>
@@ -7,31 +8,9 @@
 {% block content %}
     <div class="account-box row">
         <div class="account-box-content col">
-            <form method="post" class="auth">
-                {{ form.csrf_token }}
-
-                <p>{{ form.username.label }}</p>
-                <p>{{ form.username(size=20) }}</p>
-                {% if form.username.errors %}
-                    <ul class="errors">
-                    {% for error in form.username.errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-
-                <p>{{ form.password.label }}</p>
-                <p>{{ form.password(size=20) }}</p>
-                {% if form.password.errors %}
-                    <ul class="errors">
-                    {% for error in form.password.errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-
-                <input class="btn btn-primary" type="submit" value="Sign Up">
-            </form>
+            <div class="account-box-content col">
+                {{ render_form(form, button_style='success') }}
+            </div>
         </div>
         <div class="picture_account col">
             <img style="height: 390px;" src="https://scribie.com/assets/front/illustrations/Welcome-to-scribie-512x391.svg" class="imgFormat"/>

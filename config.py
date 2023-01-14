@@ -10,3 +10,4 @@ class Config(object):
     SECRET_KEY = token_hex()
     DATABASE = os.path.join(current_app.instance_path, 'book_writer.sqlite')
     WTF_CSRF_SECRET_KEY = token_hex()
+    BOOTSTRAP_BOOTSWATCH_THEME = 'lumen'
