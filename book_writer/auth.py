@@ -1,4 +1,4 @@
-"""User authentication and autorization."""
+"""User authentication and authorization."""
 
 import functools
 

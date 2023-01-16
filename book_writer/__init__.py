@@ -25,7 +25,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from . import db, auth, book
+    from . import db, auth, book, users
     # registering application
     db.init_app(app)
     csrf = CSRFProtect()
@@ -35,6 +35,7 @@ def create_app(test_config=None):
     # registering blueprints
     app.register_blueprint(auth.bp)
     app.register_blueprint(book.bp)
+    app.register_blueprint(users.bp)
     app.add_url_rule('/', endpoint='index')
     from .http_errors import \
         page_not_found, internal_server_error

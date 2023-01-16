@@ -173,20 +173,3 @@ def read(book_id):
         db.commit()
         flash("Thanks for your rating!")
     return render_template('book/read_book.html', book=book, form=rate_form)
-
-
-@bp.route("/users")
-def show_users():
-    db = get_db()
-    users = {}
-    query = db.execute("""
-    SELECT rating, username FROM book JOIN user ON book.author_id = user.id
-    """).fetchall()
-    for user in query:
-        if user['username'] not in users.keys():
-            users[user['username']] = user['rating']
-        else:
-            users[user['username']] = (
-                    users[user['username']] + user['rating']
-            ) / 2
-    return render_template('book/users.html', users=users)
