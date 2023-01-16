@@ -21,4 +21,4 @@ def show_users():
             users[user['username']] = (
                     users[user['username']] + user['rating']
             ) / 2
-    return render_template('book/users.html', users=users)
+    return render_template('users/users.html', users=users)
