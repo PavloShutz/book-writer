@@ -47,7 +47,9 @@
         <form action="{{ url_for('book.delete', book_id=book['id']) }}" method="post">
             {{ form.csrf_token }}
             <div>
-                <input class="btn btn-danger" type="submit" value="DELETE" onclick="return confirm('Are you sure?');">
+                <button style="width: 200px;" value="DELETE" aria-label="Delete" class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?');">
+                    <img width="30px" height="30px" src="{{ url_for('static', filename='trash3-fill.svg') }}" aria-hidden="true">
+                </button>
             </div>
         </form>
     </div>
