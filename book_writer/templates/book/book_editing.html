@@ -46,7 +46,9 @@
         <hr>
         <form action="{{ url_for('book.delete', book_id=book['id']) }}" method="post">
             {{ form.csrf_token }}
-            <input class="btn btn-danger" type="submit" value="DELETE" onclick="return confirm('Are you sure?');">
+            <div>
+                <input class="btn btn-danger" type="submit" value="DELETE" onclick="return confirm('Are you sure?');">
+            </div>
         </form>
     </div>
 {% endblock %}

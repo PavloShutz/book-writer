@@ -3,7 +3,9 @@
 {% block header %}
 <h1 style="text-align: center;font-size: 60px;">{% block title %}Books{% endblock %}</h1>
     {% if g.user %}
-        <a style="height: 40px;font-family: Roboto Slab;" class="btn btn-dark" href="{{ url_for('book.create') }}">Create Book</a>
+        <a style="height: 40px;font-family: Roboto Slab;" class="btn btn-info" href="{{ url_for('book.create') }}">
+            Create Book  <img src="{{ url_for('static', filename='pen-tool.svg') }}">
+        </a>
     {% endif %}
     <hr>
 {% endblock %}
@@ -35,10 +37,14 @@
                                     {{ book['created'].strftime('%Y-%m-%d') }}
                                 </div>
                                 <div class="text-center">
-                                    <a style="font-family: Roboto Slab;width: 15rem;" class="btn btn-primary" href="{{ url_for('book.read', book_id=book['id']) }}">Read</a>
+                                    <a style="font-family: Roboto Slab;width: 15rem;" class="btn btn-primary" href="{{ url_for('book.read', book_id=book['id']) }}">
+                                        Read <img src="{{ url_for('static', filename='book-open.svg') }}">
+                                    </a>
                                     <br><br>
                                     {% if g.user['id'] == book['author_id'] %}
-                                        <a style="font-family: Roboto Slab;width: 15rem;" class="btn btn-warning" href="{{ url_for('book.update', book_id=book['id']) }}">Edit</a>
+                                        <a style="font-family: Roboto Slab;width: 15rem;" class="btn btn-warning" href="{{ url_for('book.update', book_id=book['id']) }}">
+                                            Edit <img src="{{ url_for('static', filename='edit.svg') }}">
+                                        </a>
                                     {% endif %}
                                 </div>
                         </div>

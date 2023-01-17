@@ -22,7 +22,7 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 def get_form_data_from_user(form: LoginForm | RegisterForm) -> tuple:
-    return form.username.data, form.password.data
+    return form.username.data, form.password.data, form.email.data
 
 
 @bp.route('/register', methods=('GET', 'POST'))
@@ -30,7 +30,7 @@ def register():
     """Sign up page"""
     form = RegisterForm()
     if request.method == 'POST':
-        username, password = get_form_data_from_user(form)
+        username, password, email = get_form_data_from_user(form)
         db = get_db()
         error = None
 
@@ -38,12 +38,14 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
+        elif not email:
+            error = 'Email is required.'
 
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
+                    "INSERT INTO user (username, password, email) VALUES (?, ?, ?)",
+                    (username, generate_password_hash(password), email),
                 )
                 db.commit()
             except db.IntegrityError:
@@ -61,15 +63,16 @@ def login():
     """Sign In page."""
     form = LoginForm()
     if request.method == 'POST':
-        username, password = get_form_data_from_user(form)
+        username_or_email = form.username_or_email.data
+        password = form.password.data
         db = get_db()
         error = None
         user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
+            'SELECT * FROM user WHERE username = ? OR email = ?', (username_or_email, username_or_email)
         ).fetchone()
 
         if user is None:
-            error = 'Incorrect username.'
+            error = 'Incorrect username or email.'
         elif not check_password_hash(user['password'], password):
             error = 'Incorrect password.'
 

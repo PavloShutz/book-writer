@@ -22,3 +22,10 @@ def show_users():
                     users[user['username']] + user['rating']
             ) / 2
     return render_template('users/users.html', users=users)
+
+
+@bp.route('/profile/<int:user_id>')
+def show_user_profile(user_id):
+    user = get_db().execute("""SELECT username, email, COUNT(title) as amount_of_written_books FROM user 
+        LEFT JOIN book ON book.author_id = user.id WHERE user.id = ?;""", (user_id,)).fetchone()
+    return render_template("users/profile.html", user=user)

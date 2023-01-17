@@ -5,21 +5,23 @@ from wtforms import (
     PasswordField,
     SelectField,
     TextAreaField,
-    SubmitField
+    SubmitField,
+    EmailField
 )
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email
 
 from .constants import GENRES
 
 
 class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
+    username_or_email = StringField("Username or Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField()
 
 
 class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
+    email = EmailField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField()
 
