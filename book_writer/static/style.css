@@ -23,6 +23,10 @@ hr { border: none; border-top: 1px solid lightgray; }
 input.danger { color: #cc2f2e; }
 input[type=submit] { align-self: center; min-width: 10em; }
 
+.dark-mode-body {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/002/042/707/original/night-clouds-moonlight-illustration-vector.jpg');
+}
+
 
 .logo {
     text-align: left;
