@@ -18,8 +18,13 @@ Book writer web application allows you to write your book online. Though it seem
 4. See users statistics
 
 ## How to install it?
-```
+* #### Clone this repository
+```commandline
 git clone https://github.com/PavloShutz/book-writer.git
+```
+* #### Install all requirements
+```commandline
+pip install -r requirements.txt
 ```
 
 ## Other preparations
