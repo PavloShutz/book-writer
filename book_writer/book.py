@@ -1,3 +1,5 @@
+"""Routes for books logic."""
+
 from flask import (
     Blueprint,
     flash,
@@ -21,6 +23,7 @@ bp = Blueprint('book', __name__)
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
+    """Main page of book_writer."""
     search = False
     q = request.args.get('q')
     if q:
@@ -50,6 +53,7 @@ def index():
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
+    """Create book"""
     form = BookEditingForm()
     if request.method == 'POST':
         title = form.title.data
@@ -78,6 +82,7 @@ def create():
 
 
 def get_book(book_id, check_author=True, read_mode=False):
+    """Get book data"""
     book = get_db().execute(
         'SELECT b.id, title, content, created, genre, rating, author_id, username'
         ' FROM book b JOIN user u ON b.author_id = u.id'
@@ -96,6 +101,7 @@ def get_book(book_id, check_author=True, read_mode=False):
 
 
 def get_genre(book_id):
+    """Get book genre"""
     db = get_db()
     genre = db.execute(
         "SELECT genre FROM book WHERE id = ?", (book_id,)
@@ -106,6 +112,7 @@ def get_genre(book_id):
 @bp.route('/<int:book_id>/update', methods=('GET', 'POST'))
 @login_required
 def update(book_id):
+    """Update book"""
     book = get_book(book_id)
     form = BookEditingForm()
     if request.method == 'POST':
@@ -137,6 +144,7 @@ def update(book_id):
 @bp.route('/<int:book_id>/delete', methods=('POST',))
 @login_required
 def delete(book_id):
+    """Delete book"""
     get_book(book_id)
     db = get_db()
     db.execute('DELETE FROM book WHERE id = ?', (book_id,))
@@ -145,6 +153,7 @@ def delete(book_id):
 
 
 def get_rating(book_id):
+    """Get book rating"""
     db = get_db()
     rating = db.execute("SELECT rating FROM book WHERE id = ?", (book_id,)).fetchone()
     return rating[0]
@@ -152,6 +161,7 @@ def get_rating(book_id):
 
 @bp.route('/read/<int:book_id>', methods=("GET", "POST"))
 def read(book_id):
+    """View book content and rate it"""
     if session.get('user_id') is None:
         return redirect(url_for('auth.login'))
     book = get_book(book_id, read_mode=True)

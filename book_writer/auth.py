@@ -60,7 +60,7 @@ def register():
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
-    """Sign In page."""
+    """Sign in page."""
     form = LoginForm()
     if request.method == 'POST':
         username_or_email = form.username_or_email.data
@@ -88,6 +88,7 @@ def login():
 
 @bp.before_app_request
 def load_logged_in_user():
+    """Load user before request is handled"""
     user_id = session.get('user_id')
     if user_id is None:
         g.user = None

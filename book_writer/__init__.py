@@ -8,7 +8,8 @@ from flask_bootstrap import Bootstrap5
 
 
 def create_app(test_config=None):
-    # create and configure app
+    """Create and configure app"""
+
     app = Flask(__name__, instance_relative_config=True)
 
     if test_config is None:

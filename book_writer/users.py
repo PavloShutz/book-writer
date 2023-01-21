@@ -9,6 +9,7 @@ bp = Blueprint('users', __name__)
 
 @bp.route("/users")
 def show_users():
+    """Show table of users and their data"""
     db = get_db()
     users = {}
     query = db.execute("""
@@ -26,6 +27,7 @@ def show_users():
 
 @bp.route('/profile/<int:user_id>')
 def show_user_profile(user_id):
+    """Opens page with user's profile"""
     user = get_db().execute("""SELECT username, email, COUNT(title) as amount_of_written_books FROM user 
         LEFT JOIN book ON book.author_id = user.id WHERE user.id = ?;""", (user_id,)).fetchone()
     return render_template("users/profile.html", user=user)
