@@ -9,6 +9,7 @@ bp = Blueprint('users', __name__)
 
 @bp.route("/users")
 def show_users():
+    """Show table of users and their data"""
     db = get_db()
     users = {}
     query = db.execute("""
