@@ -11,6 +11,7 @@ setup(
         'flask-paginate',
         'flask-wtf',
         'email_validator',
-        'python-dotenv'
+        'python-dotenv',
+        'pytest'
     ],
 )
