@@ -1,10 +1,29 @@
-"""Book writer with ```create_app``` application factory."""
+"""Book writer with ```create_app``` application factory
+and basic logging config."""
 
 import os
+from logging.config import dictConfig
 
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 from flask_bootstrap import Bootstrap5
+
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s]--[%(module)s]--[%(levelname)s]--[%(message)s]',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default',
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi'],
+    }
+})
 
 
 def create_app(test_config=None):
