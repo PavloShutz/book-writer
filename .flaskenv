@@ -1,0 +1,2 @@
+FLASK_APP=book_writer
+FLASK_DEBUG=True
