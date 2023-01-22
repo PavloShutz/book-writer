@@ -1,4 +1,5 @@
-"""Book writer with ```create_app``` application factory."""
+"""Book writer with ```create_app``` application factory
+and basic logging config."""
 
 import os
 from logging.config import dictConfig
