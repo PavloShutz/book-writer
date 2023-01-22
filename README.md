@@ -28,7 +28,10 @@ pip install -r requirements.txt
 ```
 
 ## Other preparations
-- Initialize database: ```flask --app book_writer init-db```
+- Initialize database:
+```commandline
+flask init-db
+```
 - Specify secret keys in config.py: 
 ```python
 SECRET_KEY = "YOUR SECRET KEY HERE"
