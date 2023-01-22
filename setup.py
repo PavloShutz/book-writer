@@ -10,6 +10,7 @@ setup(
         'bootstrap-flask',
         'flask-paginate',
         'flask-wtf',
-        'email_validator'
+        'email_validator',
+        'python-dotenv'
     ],
 )
