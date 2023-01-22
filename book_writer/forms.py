@@ -22,6 +22,7 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
+    """``Basic`` 'Sign up form'"""
     username = StringField("Username", validators=[DataRequired()])
     email = EmailField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
@@ -29,7 +30,7 @@ class RegisterForm(FlaskForm):
 
 
 class BookEditingForm(FlaskForm):
-    """Edit book in book editor."""
+    """Edit book in book editor"""
     label = Markup('<label class="label">{}</label>')
     title = StringField(
         label=label.format("Title"), validators=[DataRequired()]
@@ -44,7 +45,7 @@ class BookEditingForm(FlaskForm):
 
 
 class RateForm(FlaskForm):
-    """Publish book rating."""
+    """Rate books"""
     label = Markup('<label class="label">{}</label>')
     rate = SelectField(
         label=label.format("Rate this book"), choices=[
