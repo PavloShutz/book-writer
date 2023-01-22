@@ -14,8 +14,9 @@ from .constants import GENRES
 
 
 class LoginForm(FlaskForm):
-    """``Basic`` 'Log in form'"""
-    username_or_email = StringField("Username or Email", validators=[DataRequired()])
+    username_or_email = StringField(
+        "Username or Email", validators=[DataRequired()]
+    )
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField()
 

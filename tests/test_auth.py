@@ -1,5 +1,5 @@
 import pytest
-from flask import g, session
+from flask import session
 from book_writer.db import get_db
 
 

@@ -34,7 +34,8 @@ def index():
     db = get_db()
     total = db.execute("SELECT * FROM book").fetchall()
     books = db.execute(
-        'SELECT b.id, title, content, created, genre, rating, author_id, username'
+        'SELECT b.id, title, content, created,'
+        ' genre, rating, author_id, username'
         ' FROM book b JOIN user u ON b.author_id = u.id'
         ' ORDER BY created DESC LIMIT ? OFFSET ?', (per_page, offset)
     ).fetchall()
@@ -47,7 +48,9 @@ def index():
         record_name='books',
         css_framework='bootstrap5'
     )
-    return render_template('book/index.html', books=books, pagination=pagination)
+    return render_template(
+        'book/index.html', books=books, pagination=pagination
+    )
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -84,7 +87,8 @@ def create():
 def get_book(book_id, check_author=True, read_mode=False):
     """Get book data"""
     book = get_db().execute(
-        'SELECT b.id, title, content, created, genre, rating, author_id, username'
+        'SELECT b.id, title, content, created,'
+        ' genre, rating, author_id, username'
         ' FROM book b JOIN user u ON b.author_id = u.id'
         ' WHERE b.id = ?',
         (book_id,)
@@ -155,7 +159,10 @@ def delete(book_id):
 def get_rating(book_id):
     """Get book rating"""
     db = get_db()
-    rating = db.execute("SELECT rating FROM book WHERE id = ?", (book_id,)).fetchone()
+    rating = db.execute(
+        "SELECT rating FROM book WHERE id = ?",
+        (book_id,)
+    ).fetchone()
     return rating[0]
 
 

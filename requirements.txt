@@ -13,3 +13,5 @@ MarkupSafe==2.1.1
 python-dotenv==0.21.1
 Werkzeug==2.2.2
 WTForms==3.0.1
+pytest~=7.2.1
+setuptools~=65.5.1
